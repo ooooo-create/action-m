@@ -1,0 +1,67 @@
+job,workflow,total_minutes,job_runs,failure_rate,avg_run_time,avg_queue_time
+Api benchmark baseline with schedule (api-bm-20) / Performance data storage,.github/workflows/Api-Benchmark-baseline.yml,47,2,0.0,1388988,3326
+Api benchmark build / Build,.github/workflows/Api-Benchmark-baseline.yml,88,2,0.0,2594425,3490
+Api benchmark build docker / Build docker,.github/workflows/Api-Benchmark-baseline.yml,4,2,0.0,100768,2533
+Api benchmark clone / Clone Paddle,.github/workflows/Api-Benchmark-baseline.yml,4,2,0.0,95531,3267
+Check approval,.github/workflows/Approval.yml,280,280,54.29,28206,3250
+Api-Benchmark / Performance data storage,.github/workflows/CI-Build.yml,3420,144,6.25,1402185,622592
+Auto-Parallel / Parallel test,.github/workflows/CI-Build.yml,7304,149,17.45,2911521,2374338
+CE-CINN-Framework / CINN,.github/workflows/CI-Build.yml,543,143,0.7,207198,195190
+CE-Framework / Infer,.github/workflows/CI-Build.yml,3024,146,1.37,1207669,176068
+CE-Framework / Test,.github/workflows/CI-Build.yml,2230,148,7.43,870307,184153
+CE-Framework / Whl,.github/workflows/CI-Build.yml,450,141,0.0,163147,852468
+Clone-linux / Clone Paddle,.github/workflows/CI-Build.yml,730,191,0.0,200544,205853
+Doc-Preview / Build doc,.github/workflows/CI-Build.yml,1104,140,0.71,453896,203445
+Linux-build / Build,.github/workflows/CI-Build.yml,10405,176,6.82,3515728,774601
+Model-Benchmark / Benchmark test,.github/workflows/CI-Build.yml,3740,157,19.75,1398411,97788
+PR-CI-Inference / Build,.github/workflows/CI-Build.yml,6951,183,6.56,2247812,763673
+PR-CI-Inference / Test,.github/workflows/CI-Build.yml,1168,154,3.25,421813,13633
+Slice / Slice test,.github/workflows/CI-Build.yml,1160,190,36.84,342739,130951
+Static-Check / Test,.github/workflows/CI-Build.yml,934,168,32.74,305116,101402
+build docker images / Build docker,.github/workflows/CI-Build.yml,475,185,0.0,126088,13538
+Clone-windows / Clone Paddle,.github/workflows/CI-Windows.yml,459,199,0.0,117399,19347
+Windows-GPU / Build and test,.github/workflows/CI-Windows.yml,18988,189,25.4,5998058,3120826
+Windows-Inference / Build and test,.github/workflows/CI-Windows.yml,18203,189,16.4,5747298,98813
+Windows-OPENBLAS / Build and test,.github/workflows/CI-Windows.yml,8340,232,40.09,2129961,3114
+Clone-linux / Clone Paddle,.github/workflows/CI.yml,728,190,0.0,197543,228307
+Distribute-stable / Build,.github/workflows/CI.yml,233,5,0.0,2755627,1665850
+Distribute-stable / Test,.github/workflows/CI.yml,45,5,0.0,507829,65900
+Distribute-stable-build / Build,.github/workflows/CI.yml,8397,176,7.39,2833435,747947
+Distribute-stable-formers / formers-Test,.github/workflows/CI.yml,800,239,98.33,168011,238974
+Distribute-stable-test / Test,.github/workflows/CI.yml,1597,165,30.3,551356,205405
+Linux-CPU / Build and test,.github/workflows/CI.yml,6895,182,18.13,2241186,804653
+Linux-DCU / Build,.github/workflows/CI.yml,10058,174,5.17,3437253,481149
+Linux-DCU / Test,.github/workflows/CI.yml,13012,147,14.97,5281363,10144
+Linux-NPU / Test,.github/workflows/CI.yml,1179,127,0.0,531154,10606
+Linux-XPU / Build,.github/workflows/CI.yml,10093,167,4.19,3594894,4067313
+Linux-XPU / Test,.github/workflows/CI.yml,4170,142,11.97,1731828,652252
+Mac-CPU / Build and test,.github/workflows/CI.yml,3561,186,14.52,1120323,92881
+PR-CI-SOT / Build and Test,.github/workflows/CI.yml,15904,173,9.83,5484832,815096
+build docker images / Build docker,.github/workflows/CI.yml,476,186,0.0,129730,11385
+Check,.github/workflows/CheckPRTemplate-fleety.yml,14,14,35.71,21745,2682
+Check,.github/workflows/CheckPRTemplate.yml,329,316,17.41,29795,11328
+Pre Commit,.github/workflows/Codestyle-Check.yml,205,203,10.34,43704,3361
+Coverage build,.github/workflows/Coverage.yml,15848,185,8.11,5111457,769723
+Coverage build docker / Build docker,.github/workflows/Coverage.yml,468,187,0.0,123624,9998
+Coverage clone / Clone Paddle,.github/workflows/Coverage.yml,783,195,0.0,211882,134560
+Coverage test,.github/workflows/Coverage.yml,24010,155,37.42,9263481,176461
+Coverage build,.github/workflows/H-Coverage.yml,10510,209,28.23,2986928,749910
+Coverage clone / Clone Paddle,.github/workflows/H-Coverage.yml,749,187,0.0,210724,129465
+Coverage test,.github/workflows/H-Coverage.yml,3753,151,25.17,1462318,26734
+Coverage build,.github/workflows/Night_ALL_Coverage.yml,144,2,0.0,4300969,5611
+Coverage build docker,.github/workflows/Night_ALL_Coverage.yml,2,2,0.0,22336,2585
+Coverage test,.github/workflows/Night_ALL_Coverage.yml,476,2,0.0,14256969,3345
+Slice build / Build,.github/workflows/Slice-baseline.yml,25,1,0.0,1451653,4874535
+Slice build docker / Build docker,.github/workflows/Slice-baseline.yml,2,1,0.0,113511,2384
+Slice test / Slice test,.github/workflows/Slice-baseline.yml,6,1,0.0,342613,436593
+Slice-base clone / Clone Paddle,.github/workflows/Slice-baseline.yml,2,1,0.0,112929,3239
+Slice build docker / Build docker,.github/workflows/Slice-torch.yml,2,1,0.0,93113,2519
+Slice test / Slice test,.github/workflows/Slice-torch.yml,9,1,0.0,518030,3136
+Slice-base clone / Clone Paddle,.github/workflows/Slice-torch.yml,3,1,0.0,136622,2853
+Remove skip-ci labels on new commits,.github/workflows/remove-skip-ci-labels.yml,150,150,0.0,3887,2807
+re-run,.github/workflows/rerun.yml,121,121,0.0,28979,3085
+Agent,dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer,7,2,0.0,170481,2441
+Cleanup artifacts,dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer,2,2,0.0,5091,3295
+CodeQL analysis (python),dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer,10,1,0.0,548455,4360
+Prepare,dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer,2,2,0.0,3529,2195
+Upload results,dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer,2,2,0.0,8660,2593
