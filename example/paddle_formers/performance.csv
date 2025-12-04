@@ -1,0 +1,10 @@
+"""'Job""","""'Workflow""","""'Failure rate""","""'Avg run time""","""'Avg queue time""","""'Runner type""","""'Runner labels""","""'Job runs"""
+"""'model-unittest-gpu-ci""","""'.github/workflows/model-unittest-gpu.yml""",24.48,1341593,3289225,"""'self-hosted""","""'ernie-8gpu""",143
+"""'unittest-gpu-ci""","""'.github/workflows/unittest-gpu.yml""",42.86,995609,5032458,"""'self-hosted""","""'ernie-8gpu-1""",21
+"""'unittest-gpu-ci""","""'.github/workflows/unittest-gpu.yml""",49.39,566203,3272765,"""'self-hosted""","""'ernie-8gpu""",164
+"""'Lint""","""'.github/workflows/lint.yml""",11.29,243537,6140,"""'self-hosted""","""'self-hosted, ernie-cpu""",248
+"""'build-ce""","""'.github/workflows/ce-build-wh.yml""",2.86,32569,4456,"""'self-hosted""","""'self-hosted, paddleformers""",35
+"""'upload-coverage""","""'.github/workflows/unittest-gpu.yml""",24.53,14011,2705,"""'hosted""","""'ubuntu-latest""",106
+"""'stale""","""'.github/workflows/stale.yml""",0.00,10638,2452,"""'hosted""","""'ubuntu-24.04""",4
+"""'re-run""","""'.github/workflows/rerun.yml""",0.00,6279,2802,"""'hosted""","""'ubuntu-latest""",12
+"""'review_request""","""'.github/workflows/requirements-review.yml""",100.00,6222,2653,"""'hosted""","""'ubuntu-latest""",38

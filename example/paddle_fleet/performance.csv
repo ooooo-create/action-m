@@ -1,0 +1,17 @@
+"""'Job""","""'Workflow""","""'Failure rate""","""'Avg run time""","""'Avg queue time""","""'Runner type""","""'Runner labels""","""'Job runs"""
+"""'Publish wheel nightly (CUDA12.6)""","""'.github/workflows/publish_wheel_nightly.yml""",0.00,10503336,4930,"""'self-hosted""","""'""",3
+"""'Publish wheel nightly (CUDA12.9)""","""'.github/workflows/publish_wheel_nightly.yml""",0.00,7976851,4852,"""'self-hosted""","""'""",3
+"""'Single card test""","""'.github/workflows/Test.yml""",24.48,705885,437538,"""'self-hosted""","""'""",143
+"""'Integration test (H20)""","""'.github/workflows/Test.yml""",50.54,434314,36571,"""'self-hosted""","""'""",186
+"""'Multi-card test""","""'.github/workflows/Test.yml""",8.20,324328,30640,"""'self-hosted""","""'""",183
+"""'Integration test (A100)""","""'.github/workflows/Test.yml""",10.00,166564,147565,"""'self-hosted""","""'""",170
+"""'Agent""","""'dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer""",0.00,149895,3125,"""'hosted""","""'ubuntu-latest""",4
+"""'CodeQL analysis (python)""","""'dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer""",0.00,68972,2410,"""'hosted""","""'ubuntu-latest""",3
+"""'Codestyle Check""","""'.github/workflows/Codestyle-Check.yml""",13.90,44081,2885,"""'hosted""","""'ubuntu-latest""",187
+"""'Coverage Upload And Check""","""'.github/workflows/Test.yml""",66.00,25566,2588,"""'hosted""","""'ubuntu-latest""",50
+"""'Upload results""","""'dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer""",0.00,15752,3650,"""'hosted""","""'ubuntu-latest""",4
+"""'Check approval""","""'.github/workflows/Approval.yml""",25.39,6652,2601,"""'hosted""","""'ubuntu-latest""",193
+"""'Cleanup artifacts""","""'dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer""",0.00,4626,2979,"""'hosted""","""'ubuntu-latest""",4
+"""'Check bypass / Check bypass""","""'.github/workflows/Test.yml""",0.00,4302,2735,"""'hosted""","""'ubuntu-latest""",196
+"""'Prepare""","""'dynamic/copilot-pull-request-reviewer/copilot-pull-request-reviewer""",0.00,4159,2729,"""'hosted""","""'ubuntu-latest""",4
+"""'Remove skip-ci labels on new commits""","""'.github/workflows/remove-skip-ci-labels.yml""",0.00,4048,2772,"""'hosted""","""'ubuntu-latest""",179

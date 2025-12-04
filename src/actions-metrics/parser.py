@@ -131,16 +131,18 @@ def merge_usage_performance(
 
 
 def filter_jobs(df: pl.DataFrame) -> pl.DataFrame:
-	"""Filter out jobs that are related to 'Cancel' or 'Check bypass'.
+	"""Filter out unwanted jobs and workflows.
 
-	This removes rows where the 'job' column contains 'Cancel' or 'Check bypass' (case-insensitive).
+	- Removes rows where 'job' contains 'Cancel' or 'Check bypass'.
+	- Removes rows where 'workflow' contains 'copilot' or 'fleety'.
 	"""
-	if "job" not in df.columns:
-		return df
+	if "job" in df.columns:
+		df = df.filter(~pl.col("job").str.contains(r"(?i)Cancel|Check bypass"))
 
-	return df.filter(
-		~pl.col("job").str.contains(r"(?i)Cancel|Check bypass")
-	)
+	if "workflow" in df.columns:
+		df = df.filter(~pl.col("workflow").str.contains(r"(?i)copilot|fleety"))
+
+	return df
 
 
 def sort_by_workflow_and_job(df: pl.DataFrame) -> pl.DataFrame:
@@ -148,6 +150,37 @@ def sort_by_workflow_and_job(df: pl.DataFrame) -> pl.DataFrame:
 	if "workflow" in df.columns and "job" in df.columns:
 		return df.sort(["workflow", "job"])
 	return df
+
+
+def prepare_excel_data(df: pl.DataFrame) -> tuple[pl.DataFrame, dict[str, str]]:
+	"""Prepare data for Excel export to support native sorting and formatting.
+
+	Converts time units to Excel serial date format (days) and percentages to 0-1 decimals.
+	Returns the transformed DataFrame and a dictionary of column formats.
+	"""
+	exprs = []
+	formats = {}
+
+	# total_minutes (int) -> days (float)
+	if "total_minutes" in df.columns:
+		exprs.append((pl.col("total_minutes") / (24 * 60)).alias("total_minutes"))
+		formats["total_minutes"] = '[h]"h"mm"m"'
+
+	# failure_rate (0-100) -> (0-1)
+	if "failure_rate" in df.columns:
+		exprs.append((pl.col("failure_rate") / 100).alias("failure_rate"))
+		formats["failure_rate"] = "0.00%"
+
+	# avg_run_time, avg_queue_time (ms) -> days (float)
+	for col in ("avg_run_time", "avg_queue_time"):
+		if col in df.columns:
+			exprs.append((pl.col(col) / (24 * 60 * 60 * 1000)).alias(col))
+			formats[col] = '[h]"h"mm"m"ss"s"'
+
+	if exprs:
+		df = df.with_columns(exprs)
+	
+	return df, formats
 
 
 def load_examples_and_merge(example_dir: Union[str, Path] = "example") -> pl.DataFrame:
@@ -172,5 +205,6 @@ __all__ = [
 	"load_examples_and_merge",
 	"filter_jobs",
 	"sort_by_workflow_and_job",
+	"prepare_excel_data",
 ]
 

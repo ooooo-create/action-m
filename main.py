@@ -23,7 +23,7 @@ def _load_parser_module():
 
 def main():
     parser = _load_parser_module()
-    merged = parser.load_examples_and_merge(example_dir=Path(__file__).parent / "example")
+    merged = parser.load_examples_and_merge(example_dir=Path(__file__).parent / "example"/ "paddle_formers")
     
     # Filter out unwanted jobs
     merged = parser.filter_jobs(merged)
@@ -38,6 +38,12 @@ def main():
     output_file = "merged_metrics.csv"
     merged.write_csv(output_file)
     print(f"\nMerged data saved to {output_file}")
+
+    # save to excel
+    output_excel = "merged_metrics.xlsx"
+    merged_excel, formats = parser.prepare_excel_data(merged)
+    merged_excel.write_excel(output_excel, column_formats=formats)
+    print(f"Merged data saved to {output_excel}")
 
 
 if __name__ == "__main__":
