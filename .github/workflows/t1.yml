@@ -26,11 +26,14 @@ jobs:
         run: |
           docker run --rm \
             --user "$(id -u):$(id -g)" \
-            -e UV_CACHE_DIR=/tmp/.uv-cache \
+            -e UV_CACHE_DIR=/app/.uv_cache \
             -v "${{ github.workspace }}:/app" \
             -w /app \
             ghcr.io/astral-sh/uv:latest \
             lock --upgrade
+
+          # 清理缓存目录（因为它是挂载出来的，会留在 Runner 上）
+          rm -rf .uv_cache
 
       # 4. 创建 PR (包含生动的标题和日期)
       - name: Create Bump PR
