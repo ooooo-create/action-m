@@ -25,16 +25,21 @@ jobs:
       - name: Run uv lock --upgrade in Docker
         run: |
           docker run --rm \
-            --user "$(id -u):$(id -g)" \
-            -e UV_CACHE_DIR=/app/.uv_cache \
-            -e UV_PYTHON_PREFERENCE=only-system \
-            -v "${{ github.workspace }}:/app" \
-            -w /app \
-            ghcr.io/astral-sh/uv:python3.12-bookworm-slim \
-            uv lock --upgrade
+            -v "${{ github.workspace }}:/work" \
+            -w /work \
+            paddlepaddle/paddle:3.2.0-gpu-cuda12.9-cudnn9.9 \
+            /bin/bash -c "
+              # 1. 因为是 Root，直接安装，不需要 --user，也不会报错
+              pip install uv && \
+              
+              # 2. 执行更新
+              uv lock --upgrade && \
+              
+              # 3. 【关键一步】把生成的 uv.lock 文件权限改回宿主机用户
+              # $(id -u):$(id -g) 会在宿主机解析为 1001:121 (GitHub Runner 的 ID)
+              chown $(id -u):$(id -g) uv.lock
+            "
 
-          # 清理缓存
-          rm -rf .uv_cache
       # 4. 创建 PR (包含生动的标题和日期)
       - name: Create Bump PR
         uses: peter-evans/create-pull-request@v6
