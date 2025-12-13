@@ -27,8 +27,7 @@ jobs:
               apt-get update && \
               apt-get install -y curl && \
               curl -LsSf https://astral.sh/uv/install.sh | sh && \
-              export PATH="$HOME/.local/bin:$PATH" && \
-              uv lock --upgrade && \
+              /root/.local/bin/uv lock --upgrade && \
               chown $(id -u):$(id -g) uv.lock
             "
 
