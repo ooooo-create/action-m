@@ -27,7 +27,7 @@ jobs:
           docker run --rm \
             -v "${{ github.workspace }}:/work" \
             -w /work \
-            paddlepaddle/paddle:3.2.0-gpu-cuda12.9-cudnn9.9 \
+            nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04 \
             /bin/bash -c "
               # 1. 因为是 Root，直接安装，不需要 --user，也不会报错
               pip install uv && \
