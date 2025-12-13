@@ -1,27 +1,22 @@
 name: Auto Update uv.lock
 
 on:
-  # 允许在 Actions 页面手动点击触发
   workflow_dispatch:
-  # 计划任务：每周一凌晨 02:00 (UTC) 自动运行
   schedule:
-    - cron: '0 2 * * 1'
+    - cron: '0 16 * * *'
 
-permissions:
-  contents: write
-  pull-requests: write
 
 jobs:
   update-lockfile:
     runs-on: ubuntu-latest
     steps:
-      # 1. 检出代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Get current date
         id: date
         run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: Run uv lock --upgrade in Docker
         run: |
           docker run --rm \
@@ -29,55 +24,37 @@ jobs:
             -w /work \
             nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04 \
             /bin/bash -c "
-              # 1. 更新源并安装 Python 和 Pip
               apt-get update && \
-              apt-get install -y python3 python3-pip && \
-              
-              # 2. 安装 uv (Ubuntu 24.04 需要加 --break-system-packages)
-              python3 -m pip install uv --break-system-packages && \
-              
-              # 3. 执行更新
+              apt-get install -y curl && \
+              curl -LsSf https://astral.sh/uv/install.sh | sh && \
+              export PATH="$HOME/.local/bin:$PATH" && \
               uv lock --upgrade && \
-              
-              # 4. 修复权限
               chown $(id -u):$(id -g) uv.lock
             "
 
-      # 4. 创建 PR (包含生动的标题和日期)
       - name: Create Bump PR
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
-          # =======================================================
-          # 【自定义提交人】(需要在 Secrets 配置，或直接写死字符串)
-          # =======================================================
-          author: "ooooo <3164076421@qq.com>"
-          committer: "ooooo <3164076421@qq.com>"
+          token: ${{ secrets.UVLOCK_PAT }}
+          push-to-fork: zero-213-10/action-m
 
-          # =======================================================
-          # 【分支设置】
-          # =======================================================
+          signoff: true
           branch: chore/upgrade-uv-lock-${{ env.TODAY }}
-          delete-branch: true       # 合并后自动删除分支
-          signoff: true             # Git 签名 (Signed-off-by)
-          
-          # =======================================================
-          commit-message: "chore(beep boop 🤖): Bump `uv.lock` (${{ env.TODAY }})"
-          
-          title: "chore(beep boop 🤖): Bump `uv.lock` (${{ env.TODAY }})"
-          
+          delete-branch: true
+
+          commit-message: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
+
+          title: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
+
           body: |
             🚀 PR to bump `uv.lock` dependencies.
             📅 Created on: **${{ env.TODAY }}**
 
-            📝 **Please remember the following to-do's before merge:** 
+            📝 **Please remember the following to-do's before merge:**
             - [ ] 🔍 Verify the `uv.lock` changes
-            - [ ] ✅ Verify the presubmit CI  
+            - [ ] ✅ Verify the presubmit CI
 
             🙏 Please merge this PR only if the CI workflow completed successfully.
-            
+
             ---
             Triggered by @${{ github.actor }}
-          
-          reviewers: ooooo-create
