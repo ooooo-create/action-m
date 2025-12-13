@@ -26,6 +26,7 @@ jobs:
         run: |
           docker run --rm \
             --user "$(id -u):$(id -g)" \
+            -e UV_CACHE_DIR=/tmp/.uv-cache \
             -v "${{ github.workspace }}:/app" \
             -w /app \
             ghcr.io/astral-sh/uv:latest \
