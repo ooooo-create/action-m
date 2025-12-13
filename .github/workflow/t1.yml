@@ -1,0 +1,71 @@
+name: Auto Update uv.lock
+
+on:
+  # 允许在 Actions 页面手动点击触发
+  workflow_dispatch:
+  # 计划任务：每周一凌晨 02:00 (UTC) 自动运行
+  schedule:
+    - cron: '0 2 * * 1'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get current date
+        id: date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Run uv lock --upgrade in Docker
+        run: |
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -v "${{ github.workspace }}:/app" \
+            -w /app \
+            ghcr.io/astral-sh/uv:latest \
+            uv lock --upgrade
+
+      # 4. 创建 PR (包含生动的标题和日期)
+      - name: Create Bump PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # =======================================================
+          # 【自定义提交人】(需要在 Secrets 配置，或直接写死字符串)
+          # =======================================================
+          author: "ooooo <3164076421@qq.com>"
+          committer: "ooooo <3164076421@qq.com>"
+
+          # =======================================================
+          # 【分支设置】
+          # =======================================================
+          branch: chore/upgrade-uv-lock-${{ env.TODAY }}
+          delete-branch: true       # 合并后自动删除分支
+          signoff: true             # Git 签名 (Signed-off-by)
+          
+          # =======================================================
+          commit-message: "chore(beep boop 🤖): Bump `uv.lock` (${{ env.TODAY }})"
+          
+          title: "chore(beep boop 🤖): Bump `uv.lock` (${{ env.TODAY }})"
+          
+          body: |
+            🚀 PR to bump `uv.lock` dependencies.
+            📅 Created on: **${{ env.TODAY }}**
+
+            📝 **Please remember the following to-do's before merge:** 
+            - [ ] 🔍 Verify the `uv.lock` changes
+            - [ ] ✅ Verify the presubmit CI  
+
+            🙏 Please merge this PR only if the CI workflow completed successfully.
+            
+            ---
+            Triggered by @${{ github.actor }}
+          
+          reviewers: ooooo-create
