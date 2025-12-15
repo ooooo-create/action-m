@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 16 * * *'
-
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   update-lockfile:
@@ -34,8 +36,8 @@ jobs:
       - name: Create Bump PR
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.UVLOCK_PAT }}
-          branch-token: ${{ secrets.GITHUB_TOKEN }} 
+          token: ${{ secrets.GITHUB_TOKEN }} 
+          branch-token: ${{ secrets.UVLOCK_PAT }}
           push-to-fork: zero-213-10/action-m
 
           signoff: true
