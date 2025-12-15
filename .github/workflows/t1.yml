@@ -38,10 +38,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
           branch-token: ${{ secrets.UVLOCK_PAT }}
+          author: "ooooo <3164076421@qq.com>"
+          committer: "ooooo <3164076421@qq.com>"
           maintainer-can-modify: false
           push-to-fork: zero-213-10/action-m
 
-          signoff: true
           branch: chore/upgrade-uv-lock-${{ env.TODAY }}
           delete-branch: true
 
