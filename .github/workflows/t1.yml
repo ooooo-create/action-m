@@ -38,6 +38,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
           branch-token: ${{ secrets.UVLOCK_PAT }}
+          maintainer-can-modify: false
           push-to-fork: zero-213-10/action-m
 
           signoff: true
