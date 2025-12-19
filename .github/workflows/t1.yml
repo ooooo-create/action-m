@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 16 * * *'
+
 permissions:
   contents: write
   pull-requests: write
@@ -14,8 +15,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Get current date
         id: date
@@ -38,13 +37,10 @@ jobs:
       - name: Create Bump PR
         uses: peter-evans/create-pull-request@v6
         with:
-          branch-token: ${{ secrets.UVLOCK_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           author: "ooooo <3164076421@qq.com>"
           committer: "ooooo <3164076421@qq.com>"
-          maintainer-can-modify: false
-          push-to-fork: 'zero-213-10/action-m'
-
-          branch: chore/upgrade-uv-lock
+          branch: chore/upgrade-uv-lock-${{ env.TODAY }}
           delete-branch: true
 
           commit-message: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
@@ -55,11 +51,9 @@ jobs:
             🚀 PR to bump `uv.lock` dependencies.
             📅 Created on: **${{ env.TODAY }}**
 
-            📝 **Please remember the following to-do's before merge:**
-            - [ ] 🔍 Verify the `uv.lock` changes
-            - [ ] ✅ Verify the presubmit CI
-
-            🙏 Please merge this PR only if the CI workflow completed successfully.
+            🙏 Please close and reopen this PR to trigger CI
 
             ---
             Triggered by @${{ github.actor }}
+
+          reviewers: ooooo-create
