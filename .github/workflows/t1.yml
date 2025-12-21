@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          repository: PaddlePaddle/PaddleFleet
 
       - name: Get current date
         id: date
@@ -25,7 +27,7 @@ jobs:
           docker run --rm \
             -v "${{ github.workspace }}:/work" \
             -w /work \
-            nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04 \
+            nvidia/cuda:12.9.1-cudnn-runtime-ubuntu24.04 \
             /bin/bash -c "
               apt-get update && \
               apt-get install -y curl && \
@@ -34,26 +36,26 @@ jobs:
               chown $(id -u):$(id -g) uv.lock
             "
 
-      - name: Create Bump PR
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          author: "ooooo <3164076421@qq.com>"
-          committer: "ooooo <3164076421@qq.com>"
-          branch: chore/upgrade-uv-lock-${{ env.TODAY }}
-          delete-branch: true
+      # - name: Create Bump PR
+      #   uses: peter-evans/create-pull-request@v6
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     author: "ooooo <3164076421@qq.com>"
+      #     committer: "ooooo <3164076421@qq.com>"
+      #     branch: chore/upgrade-uv-lock-${{ env.TODAY }}
+      #     delete-branch: true
 
-          commit-message: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
+      #     commit-message: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
 
-          title: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
+      #     title: "chore 🤖: Bump `uv.lock` (${{ env.TODAY }})"
 
-          body: |
-            🚀 PR to bump `uv.lock` dependencies.
-            📅 Created on: **${{ env.TODAY }}**
+      #     body: |
+      #       🚀 PR to bump `uv.lock` dependencies.
+      #       📅 Created on: **${{ env.TODAY }}**
 
-            🙏 Please close and reopen this PR to trigger CI
+      #       🙏 Please close and reopen this PR to trigger CI
 
-            ---
-            Triggered by @${{ github.actor }}
+      #       ---
+      #       Triggered by @${{ github.actor }}
 
-          reviewers: ooooo-create
+      #     reviewers: ooooo-create
