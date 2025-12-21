@@ -49,6 +49,7 @@ jobs:
               apt-get update && \
               apt-get install -y curl && \
               curl -LsSf https://astral.sh/uv/install.sh | sh && \
+              export LD_LIBRARY_PATH=/usr/local/cuda/lib64/stubs:\$LD_LIBRARY_PATH && \
               /root/.local/bin/uv lock --upgrade --link-mode hardlink --no-cache -v && \
               chown $(id -u):$(id -g) uv.lock
             "
