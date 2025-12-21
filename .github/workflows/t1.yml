@@ -32,7 +32,7 @@ jobs:
               apt-get update && \
               apt-get install -y curl && \
               curl -LsSf https://astral.sh/uv/install.sh | sh && \
-              /root/.local/bin/uv lock --upgrade && \
+              /root/.local/bin/uv lock --upgrade --link-mode hardlink --no-cache && \
               chown $(id -u):$(id -g) uv.lock
             "
 
